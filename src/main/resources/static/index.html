@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="join-card">
+      <p class="heading">Chat Room</p>
+      <p>Enter username to join chat</p>
+      <hr />
+      <input type="text" placeholder="Enter your name" />
+      <button id="join-button">Join</button>
+    </div>
+
+    <p class="hidden" id="connecting-text">Connecting...</p>
+
+    <div class="chat-box hidden">
+      <div class="header">
+        <div>
+          <p class="heading">Group Chat</p>
+          <p class="username-container">You: <span class="username"></span></p>
+        </div>
+        <p class="online-count-container">
+          Online: <span class="online-count"></span>
+        </p>
+      </div>
+
+      <ul class="chat-messages-list"></ul>
+
+      <div class="message-box">
+        <input type="text" />
+        <button>Send</button>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+      integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+      integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
