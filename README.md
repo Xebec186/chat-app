@@ -85,11 +85,6 @@ Key files/directories under `src/main`:
 
 ### Future Improvements
 
-- **Disconnect / Leave events**
-  - Send and broadcast `LEAVE` messages when a user disconnects (e.g., via WebSocket session disconnect events).
-  - Show “`<username> left the chat`” system messages in the UI.
-  - Update any online user counts or lists when users leave.
-
 - **User join alerts / info**
   - Finish the existing TODO in `script.js` to render `JOIN` messages.
   - Display a system message like “`<username> joined the chat`” at the top or within the message list.
