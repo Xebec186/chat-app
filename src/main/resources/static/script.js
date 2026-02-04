@@ -59,7 +59,8 @@ function onReceive(payload) {
   }
 
   if (message.type === "JOIN") {
-    return; // TODO: Join in html
+    addJoinedMessageToList(message.sender);
+    return;
   }
 
   if (message.type === "LEAVE") {
@@ -117,6 +118,26 @@ function addDisconnectMessageToList(username) {
   // create span element and add text "left the chat", append to li
   const span = document.createElement("span");
   span.textContent = " left the chat";
+  li.appendChild(span);
+
+  // append li to chat messages list
+  chatMessagesList.appendChild(li);
+}
+
+function addJoinedMessageToList(username) {
+  // create li, assign class of join-message
+  const li = document.createElement("li");
+  li.classList.add("join-message");
+
+  // create span element for username and assign class of joined-username, append to li
+  const usernameSpan = document.createElement("span");
+  usernameSpan.textContent = username;
+  usernameSpan.classList.add("joined-username");
+  li.appendChild(usernameSpan);
+
+  // create span element and add text "joined the chat", append to li
+  const span = document.createElement("span");
+  span.textContent = " joined the chat";
   li.appendChild(span);
 
   // append li to chat messages list
