@@ -152,6 +152,15 @@ body {
   background-color: #2a994b;
 }
 
+.disconnect-message {
+  width: fit-content;
+  margin: 10px auto;
+  padding: 10px 16px;
+  border-radius: 30px;
+  background-color: #444758;
+  color: rgb(180, 180, 180);
+}
+
 .hidden {
   display: none;
 }
