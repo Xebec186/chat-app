@@ -43,6 +43,39 @@ sendMessageButton.addEventListener("click", () => {
   sendMessageInputField.value = "";
 });
 
+function onConnect() {
+  stompClient.subscribe("/topic/public", onReceive);
+  stompClient.send(
+    "/app/chat.addUser",
+    {},
+    JSON.stringify({ sender: username, type: "JOIN" }),
+  );
+}
+
+function onReceive(payload) {
+  const message = JSON.parse(payload.body);
+  if (message.sender === username) {
+    return;
+  }
+
+  if (message.type === "JOIN") {
+    return; // TODO: Join in html
+  }
+
+  if (message.type === "LEAVE") {
+    addDisconnectMessageToList(message.sender);
+    return;
+  }
+
+  addMessageToList(message, false);
+}
+
+function sendMessage(message) {
+  stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
+}
+
+function onError() {}
+
 function addMessageToList(message, isMe) {
   // create li
   const li = document.createElement("li");
@@ -70,28 +103,22 @@ function addMessageToList(message, isMe) {
   chatMessagesList.appendChild(li);
 }
 
-function onConnect() {
-  stompClient.subscribe("/topic/public", onReceive);
-  stompClient.send(
-    "/app/chat.addUser",
-    {},
-    JSON.stringify({ sender: username, type: "JOIN" }),
-  );
-}
+function addDisconnectMessageToList(username) {
+  // create li, assign class of disconnect-message
+  const li = document.createElement("li");
+  li.classList.add("disconnect-message");
 
-function onReceive(payload) {
-  const message = JSON.parse(payload.body);
-  if (message.sender === username) {
-    return;
-  }
-  if (message.type === "JOIN") {
-    return; // TODO: Join in html
-  }
-  addMessageToList(message, false);
-}
+  // create span element for username and assign class of disconnected-username, append to li
+  const usernameSpan = document.createElement("span");
+  usernameSpan.textContent = username;
+  usernameSpan.classList.add("disconnected-username");
+  li.appendChild(usernameSpan);
 
-function sendMessage(message) {
-  stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
-}
+  // create span element and add text "left the chat", append to li
+  const span = document.createElement("span");
+  span.textContent = " left the chat";
+  li.appendChild(span);
 
-function onError() {}
+  // append li to chat messages list
+  chatMessagesList.appendChild(li);
+}
