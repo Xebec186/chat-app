@@ -6,6 +6,7 @@ const connectingText = document.getElementById("connecting-text");
 
 const chatBox = document.querySelector(".chat-box");
 const usernameEl = document.querySelector(".username");
+const onlineCountEl = document.querySelector(".online-count");
 const chatMessagesList = document.querySelector(".chat-messages-list");
 const sendMessageInputField = document.querySelector(".message-box input");
 const sendMessageButton = document.querySelector(".message-box button");
@@ -50,6 +51,8 @@ function onConnect() {
     {},
     JSON.stringify({ sender: username, type: "JOIN" }),
   );
+
+  updateOnlineCount();
 }
 
 function onReceive(payload) {
@@ -60,11 +63,13 @@ function onReceive(payload) {
 
   if (message.type === "JOIN") {
     addJoinedMessageToList(message.sender);
+    updateOnlineCount();
     return;
   }
 
   if (message.type === "LEAVE") {
     addDisconnectMessageToList(message.sender);
+    updateOnlineCount();
     return;
   }
 
@@ -142,4 +147,10 @@ function addJoinedMessageToList(username) {
 
   // append li to chat messages list
   chatMessagesList.appendChild(li);
+}
+
+async function updateOnlineCount() {
+  const res = await fetch("http://localhost:8080/ws/connections");
+  const count = await res.text();
+  onlineCountEl.textContent = count;
 }
