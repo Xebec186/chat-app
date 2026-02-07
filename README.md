@@ -90,11 +90,6 @@ Key files/directories under `src/main`:
   - Extend `ChatMessage` to include target information (e.g., `recipient` or `private` flag).
   - Add a UI element (user list or dropdown) to select a recipient and send private messages that only the sender and recipient can see.
 
-- **Online users and presence**
-  - Maintain a list of active users in memory or a backing store.
-  - Broadcast updates when users join/leave so clients can render an “Online users” sidebar and update the `Online:` count.
-  - Show presence indicators next to usernames.
-
 - **Typing indicators**
   - Add lightweight “typing” events (e.g., send a STOMP message when a user is typing).
   - Show “`<username> is typing...`” in the UI for a short duration.
