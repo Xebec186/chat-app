@@ -85,11 +85,6 @@ Key files/directories under `src/main`:
 
 ### Future Improvements
 
-- **User join alerts / info**
-  - Finish the existing TODO in `script.js` to render `JOIN` messages.
-  - Display a system message like “`<username> joined the chat`” at the top or within the message list.
-  - Optionally style system notifications differently (e.g., centered, lighter color).
-
 - **Private messaging / direct messages**
   - Add per‑user destinations (e.g., `/user/queue/messages`) using Spring’s user‑specific messaging support.
   - Extend `ChatMessage` to include target information (e.g., `recipient` or `private` flag).
